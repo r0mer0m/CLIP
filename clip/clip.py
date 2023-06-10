@@ -228,7 +228,7 @@ def tokenize(texts: Union[str, List[str]], context_length: int = 77, truncate: b
     for i, tokens in enumerate(all_tokens):
         if len(tokens) > context_length:
             if truncate:
-                tokens = tokens[:context_length]
+                tokens = tokens[-(context_length+1):-1]
                 tokens[-1] = eot_token
             else:
                 raise RuntimeError(f"Input {texts[i]} is too long for context length {context_length}")
